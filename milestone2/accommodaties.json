@@ -1,0 +1,93 @@
+[
+    {
+        "id": 1,
+        "naam": "Tokyo Hilton",
+        "beoordeling": 4.5,
+        "adres": "1-8-1 Nishi-Shinjuku, Shinjuku-ku, Tokyo 160-0023, Japan"
+    }
+    ,
+    {
+        "id": 2,
+        "naam": "Machu Picchu Pueblo Hotel",
+        "beoordeling": 4.8,
+        "adres": "Pueblo de Machu Picchu, Aguas Calientes 08681, Peru"
+    }
+    ,
+    {
+        "id": 3,
+        "naam": "Hotel Le Meurice",
+        "beoordeling": 4.7,
+        "adres": "228 Rue de Rivoli, 75001 Parijs, Frankrijk"
+    }
+    ,
+    {
+        "id": 4,
+        "naam": "Four Seasons Resort Bali at Sayan",
+        "beoordeling": 4.9,
+        "adres": "Sayan, Ubud, Gianyar, Bali 80571, Indonesië"
+    }
+    ,
+    {
+        "id": 5,
+        "naam": "Hotel Eden",
+        "beoordeling": 4.6,
+        "adres": "Via Ludovisi, 49, 00187 Roma RM, Italië"
+    }
+    ,
+    {
+        "id": 6,
+        "naam": "Katikies Hotel",
+        "beoordeling": 4.9,
+        "adres": "Oia, Santorini, 84702, Griekenland"
+    }
+    ,
+    {
+        "id": 7,
+        "naam": "Park Hyatt Sydney",
+        "beoordeling": 4.8,
+        "adres": "7 Hickson Road, The Rocks, Sydney NSW 2000, Australië"
+    }
+    ,
+    {
+        "id": 8,
+        "naam": "One&Only Cape Town",
+        "beoordeling": 4.7,
+        "adres": "Dock Rd, Victoria & Alfred Waterfront, Kaapstad, 8001, Zuid-Afrika"
+    }
+    ,
+    {
+        "id": 9,
+        "naam": "Belmond Copacabana Palace",
+        "beoordeling": 4.7,
+        "adres": "Av. Atlântica, 1702 - Copacabana, Rio de Janeiro - RJ, 22021-001, Brazilië"
+    }
+    ,
+    {
+        "id": 10,
+        "naam": "Hotel Arts Barcelona",
+        "beoordeling": 4.6,
+        "adres": "Carrer de la Marina, 19-21, 08005 Barcelona, Spanje"
+    }
+    ,
+    {
+        "id": 11,
+        "naam": "Burj Al Arab Jumeirah",
+        "beoordeling": 4.9,
+        "adres": "Jumeirah St - Dubai - Verenigde Arabische Emiraten"
+    }
+    ,
+    {
+        "id": 12,
+        "naam": "ION Adventure Hotel",
+        "beoordeling": 4.7,
+        "adres": "Nesjavellir, 801 Selfoss, IJsland"
+    }
+    ,
+    {
+        "id": 13,
+        "naam": "Palacio del Inka, a Luxury Collection Hotel",
+        "beoordeling": 4.8,
+        "adres": "Plazoleta Santo Domingo No 259, Cusco, Peru"
+    }
+
+]

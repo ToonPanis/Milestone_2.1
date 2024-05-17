@@ -1,0 +1,20 @@
+<%-include ("partials/header")%>
+<form method="POST" action="/bestemmingen">
+    <label for="q">Zoek op Bestemming: </label>
+    <select name="q">
+        <% for(let i=0; i < list.length; i++) { %>
+            <option value="<%= list[i] %>"><%= list[i] %></option>
+        <% } %>
+    </select>
+    <button type="submit">Zoek</button>
+</form>
+<h1><%=data.bestemming%></h1>
+<figure><img src="<%=data.afbeelding%>" height="450px"></figure>
+<ul>
+    <li>Hotel: <%=data.accommodatie.naam%></li>
+    <li>Beoordeling: <%=data.accommodatie.beoordeling%></li>
+    <li>Adres: <%=data.accommodatie.adres%></li>
+    <button type="submit"><a href="http://localhost:3000/bestemming/<%= data.accommodatie.id %>">Terug naar bestemming</a></button>
+
+</ul>
+<%-include ("partials/footer")%>

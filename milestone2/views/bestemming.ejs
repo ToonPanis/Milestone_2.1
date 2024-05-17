@@ -1,0 +1,25 @@
+<%-include ("partials/header")%>
+<form method="POST" action="/bestemmingen"> <!-- Correctie in de actie URL -->
+    <label for="q">Zoek op Bestemming: </label>
+    <select name="q">
+        <% for(let i = 0; i < list.length; i++) { %>
+            <option value="<%= list[i] %>"><%= list[i] %></option>
+        <% } %>
+    </select>
+    <button type="submit">Zoek</button>
+</form>
+
+<% if (data) { %> <!-- Voeg controle toe om te controleren of data bestaat -->
+    <h1><%= data.bestemming %></h1>
+    <figure><img src="<%= data.afbeelding %>" style="display: block; margin-left: auto; margin-right: auto;" height="450px"></figure>
+    <ul>
+        <li>Bestemming: <%= data.bestemming %></li>
+        <li>Startdatum: <%= data.startDatum %></li>
+        <li>Duur: <%= data.duur %> dagen</li>
+        <li>Status: <%= data.status %></li>
+        <li>Prijs: €<%= data.prijs %></li>
+        <button><a href="http://localhost:3000/bestemming/<%= data.accommodatie.id %>/accommodatie">Info accommodatie</a></button>
+    </ul>
+<% } %>
+
+<%-include ("partials/footer")%>
