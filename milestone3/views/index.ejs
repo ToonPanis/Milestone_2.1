@@ -1,0 +1,41 @@
+<%- include ("partials/header") %>
+
+<form action="/" method="get">
+    <select name="sortField">
+        <% for (let field of sortFields) { %>
+            <option value="<%= field.value %>" <%= field.selected %>><%= field.text %></option> 
+        <% } %>
+    </select>
+    <select name="sortDirection">
+        <% for (let direction of sortDirections) { %>
+            <option value="<%= direction.value %>" <%= direction.selected %>><%= direction.text %></option> 
+        <% } %>
+    </select>
+    <button type="submit">Sorteren</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Bestemming</th>
+            <th>Startdatum</th>
+            <th>Duur (dagen)</th>
+            <th>Prijs (€)</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (let reis of reizen) { %>
+            <tr>
+                <td><a href="http://localhost:3000/bestemming/<%= reis.accommodatie.id %>"><%= reis.bestemming %></a></td>
+                <td><%= reis.startDatum %></td>
+                <td><%= reis.duur %></td>
+                <td><%= reis.prijs %></td>
+                <td><%= reis.status %></td>
+            </tr>
+        <% } %>
+    </tbody>
+    
+</table>
+
+<%- include ("partials/footer") %>

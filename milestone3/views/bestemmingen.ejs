@@ -1,0 +1,14 @@
+<%-include ("partials/header")%>
+<form  method="POST">
+    <label for="q">Zoek Bestemming: </label>
+    <input type="search" name="q" id="q" value="<%=q%>"/>
+    <button type="submit">Zoek</button>
+</form>
+<% for (let i=0;i<data.length;i++) {%>
+    <figure><a href="/bestemming/<%=data[i].accommodatie.id%>"><img src="<%=data[i].afbeelding%>" height="150px">
+        <figcaption><%=data[i].bestemming%></figcaption>
+    </a></figure>
+<%}%>
+        
+
+<%-include ("partials/footer")%>

@@ -1,0 +1,13 @@
+<%-include ("partials/header")%>
+<form  method="POST">
+    <label for="q">Zoek op status of omschrijving: </label><br>
+    <input type="search" name="q" id="q" value="<%=q%>"/>
+    <button type="submit">Zoek</button>
+</form>
+<ol>
+<% for (let i=0;i<data.length;i++) {%>
+    <li><a href="/bestemming/<%=data[i].bestemming.id%>"><%=data[i].bestemming%></a> : <%=data[i].omschrijving%></li>
+<%}%>
+</ol>      
+
+<%-include ("partials/footer")%>
