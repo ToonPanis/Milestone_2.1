@@ -1,0 +1,22 @@
+<%-include ("partials/header")%>
+<form method="POST">
+    <label for="q">Zoek op Bestemming: </label>
+    <select name="q">
+        <% for(let item of list) { %>
+            <option value="<%= item %>"><%= item %></option>
+        <% } %>
+    </select>
+    <button type="submit">Zoek</button>
+</form>
+<h1><%=data.city%>, <%=data.country%></h1>
+<div class="s-container">
+    
+    <a href="/journey/<%= data.id %>" class="journey-card">
+        <img src="<%= data.img %>" alt="Image of <%= data.city %>">
+        <h2><%= data.country %> - <%= data.accommodation.name %></h2>
+        <p><strong>Rank:</strong> <%= data.accommodation.rank %></p>
+        <p><strong>adres:</strong> <%= data.accommodation.adress %></p> 
+    </a>
+    <button><a href="http://localhost:3001/journey/<%= data.id %>">Terug naar bestemming</a></button>
+</div>
+<%-include ("partials/footer")%>

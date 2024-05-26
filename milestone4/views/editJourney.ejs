@@ -1,0 +1,21 @@
+<%- include("partials/header") %>
+
+<h1>Update Journey</h1>
+
+<form action="/journey/<%= journey.id %>/edit" method="POST">
+    <label for="duration">Duration (days):</label>
+    <input type="number" id="duration" name="duration" value="<%= journey.duration %>">
+    
+    <label for="price">Price (€):</label>
+    <input type="number" id="price" name="price" value="<%= journey.price %>">
+    
+    <label for="startDate">Start Date:</label>
+    <input type="date" id="startDate" name="startDate" value="<%= journey.startDate %>">
+    
+    <label for="status">Status:</label>
+    <input type="text" id="status" name="status" value="<%= journey.status %>">
+    
+    <button type="submit">Update</button>
+</form>
+
+<%- include("partials/footer") %>

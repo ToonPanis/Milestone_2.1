@@ -1,0 +1,23 @@
+<%-include ("partials/header")%>
+
+<div class="search-form-container">
+    <form  action= "/searchCountries" method="POST" class="search-form">
+        <label for="q" class="search-label">Zoek op land: </label>
+        <input type="search" name="q" id="q" value="<%= q %>" class="search-input"/>
+        <button type="submit" class="search-button">Zoek</button>
+    </form>
+</div>
+
+<div class="image-gallery">
+    <% for (let i = 0; i < data.length; i++) { %>
+        <figure class="gallery-item">
+            <a href="/journey/<%= data[i].id %>/">
+            <img src="<%= data[i].img %>" height="150px" class="gallery-image">
+        </a>
+            <figcaption><%= data[i].country %>, <%= data[i].city %></figcaption>
+        </figure>
+    <% } %>
+</div>
+
+<%- include ("partials/footer") %>
+

@@ -1,0 +1,50 @@
+<%- include("partials/header") %>
+
+<h1>Journeys</h1>
+
+<form action="/" method="get">
+    <select name="sortField">
+        <% for (let field of sortFields) { %>
+            <option value="<%= field.value %>" <%= field.selected %>><%= field.text %></option> 
+        <% } %>
+    </select>
+    <select name="sortDirection">
+        <% for (let direction of sortDirections) { %>
+            <option value="<%= direction.value %>" <%= direction.selected %>><%= direction.text %></option> 
+        <% } %>
+    </select>
+    <button type="submit">Sorteren</button>
+</form>
+
+<form action="/" method="post">
+    <label for="q">Zoek op land: </label>
+    <input type="search" name="q" id="q" value="<%= q %>"/>
+    <button type="submit">Zoek</button>
+</form>
+
+<table>
+    <thead>
+        <tr>
+            <th>Land</th>
+            <th>Stad</th>
+            <th>Startdatum</th>
+            <th>Duur (dagen)</th>
+            <th>Prijs (€)</th>
+            <th>Status</th>
+        </tr>
+    </thead>
+    <tbody>
+        <% for (let journey of journeys) { %>
+            <tr>
+                <td><a href="/journey/<%= journey.id %>"><%= journey.country %></a></td>
+                <td><a href="/journey/<%= journey.id %>"><%= journey.city %></a></td>
+                <td><%= journey.startDate %></td>
+                <td><%= journey.duration %></td>
+                <td><%= journey.price %></td>
+                <td><%= journey.status %></td>
+            </tr>
+        <% } %>
+    </tbody>
+</table>
+
+<%- include("partials/footer") %>

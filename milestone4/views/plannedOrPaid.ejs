@@ -1,0 +1,16 @@
+<%- include ("partials/header") %>
+
+<div class="status-search-container">
+    <h2>Zoek op status</h2>
+    <form action="/plannedOrPaid" method="POST" class="status-search-form">
+        <label for="status" class="status-label">Status:</label>
+        <select name="status" id="status" class="status-select">
+            <% for (let status of statuses) { %>
+                <option value="<%= status %>"><%= status %></option>
+            <% } %>
+        </select>
+        <button type="submit" class="status-search-button">Zoek</button>
+    </form>
+</div>
+
+<%- include ("partials/footer") %>

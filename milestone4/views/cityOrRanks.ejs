@@ -1,0 +1,14 @@
+<%-include ("partials/header")%>
+<form  method="POST">
+    <label for="q">Zoek Bestemming: </label>
+    <input type="search" name="q" id="q" value="<%=q%>"/>
+    <button type="submit">Zoek</button>
+</form>
+<% for (let i=0;i<data.length;i++) {%>
+    <figure><a href="/journey/<%=data[i].id%>"><img src="<%=data[i].img%>" height="150px">
+        <figcaption><%=data[i].city%>, <%=data[i].country%></figcaption>
+    </a></figure>
+<%}%>
+        
+
+<%-include ("partials/footer")%>
