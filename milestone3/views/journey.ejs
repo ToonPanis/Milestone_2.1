@@ -1,0 +1,32 @@
+<%- include("partials/header") %>
+
+<form method="POST">
+    <label for="q">Zoek op land: </label>
+    <select name="q">
+        <% for (let i = 0; i < list.length; i++) { %>
+            <option value="<%= list[i] %>"><%= list[i] %></option>
+        <% } %>
+    </select>
+    <button type="submit">Zoek</button>
+</form>
+
+
+<div class="s-container">
+    
+        <a href="http://localhost:3001/journey/<%= data.accommodation.id %>/accommodation%>" class="journey-card">
+            <img src="<%= data.img %>" alt="Image of <%= data.city %>">
+            <h2><%= data.country %> - <%= data.city %></h2>
+            <p><strong>Startdatum:</strong> <%= data.startDate %></p>
+            <p><strong>Duur (dagen):</strong> <%= data.duration %></p>
+            <p><strong>Prijs (€):</strong> <%= data.price %></p>
+            <p><strong>Status:</strong> <%= data.status %></p>
+            <p><strong>Beschrijving:</strong> <%= data.discription %></p>
+            <p><strong>Activiteiten:</strong> <%= data.activities %></p>
+            <p><strong>Betaald:</strong> <%= data.paid %></p>
+        </a>
+        <button><a href="http://localhost:3001/journey/<%= data.accommodation.id %>/accommodation">Info accommodatie</a></button>
+        <button><a href="/journey/<%= data.id %>/edit">Edit data</a></button>
+        <button><a href="http://localhost:3001/allJourneys">Terug</a></button>
+        
+</div>
+<%- include("partials/footer") %>

@@ -1,11 +1,11 @@
 import { Collection, MongoClient,UpdateResult } from "mongodb";
 import dotenv from "dotenv";
-import {Journeys} from "./interfaces/journeys";
+import {Reis} from "./interfaces/Reis";
 dotenv.config();
 
 
 export const client = new MongoClient("mongodb+srv://toonpanis:Money420@webontwikkeling.fmbnoc9.mongodb.net/");
-export const collection:Collection<Journeys>=client.db("WebontwikkelingTaak2").collection<Journeys>("Milestone3");
+export const collection:Collection<Reis>=client.db("WebontwikkelingTaak").collection<Reis>("Milestone3");
 
 async function exit() {
     try {
@@ -17,38 +17,37 @@ async function exit() {
     process.exit(0);
 }
 
-export async function getJourneys()
+export async function getReizen()
 {
     return await collection.find({}).toArray();
 }
 
 
-export async function loadJourneysFromApi()
+export async function loadReizenFromApi()
 {
-    const reizen:Journeys[]=await getJourneys();
+    const reizen:Reis[]=await getReizen();
     if (reizen.length==0)
     {
         console.log("Database is empty, loading users from API")
-        let response = await fetch("https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/journeys.json");
-        let reizen:Journeys[]= await response.json();
+        let response = await fetch("https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/Reizen.json");
+        let reizen:Reis[]= await response.json();
         await collection.insertMany(reizen);
     }
     
 }
-export async function getJourneyById(id:string)
+export async function getReisById(id:string)
 {
     return await collection.findOne({id:id});
 }
-export async function updateJourney(id: string, updatedFields: Partial<Journeys>): Promise<UpdateResult> {
-    return await collection.updateOne({ id: id }, { $set: updatedFields });
+export async function updateReis(id:string,reis:Reis):Promise<UpdateResult<Reis>>
+{
+    return await collection.updateOne({ id : id }, { $set:  reis });   
 }
-
-
 export async function connect() 
 {
     try {
         await client.connect();
-        await loadJourneysFromApi();   
+        await loadReizenFromApi();   
         console.log("Connected to database");
         process.on("SIGINT", exit);
     } catch (error) {

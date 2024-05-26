@@ -1,0 +1,23 @@
+<%- include("partials/header") %>
+
+<h1>Edit Reis: <%= reis.bestemming %></h1>
+<form method="POST" action="/bestemming/<%= reis.accommodatie.id %>/editBestemming">
+    <label for="startDatum">Startdatum:</label>
+    <input type="date" id="startDatum" name="startDatum" value="<%= reis.startDatum %>" required>
+
+    <label for="duur">Duur (dagen):</label>
+    <input type="number" id="duur" name="duur" value="<%= reis.duur %>" required>
+
+    <label for="status">Status:</label>
+    <select id="status" name="status" required>
+        <option value="gepland" <%= reis.status === 'gepland' ? 'selected' : '' %>>Gepland</option>
+        <option value="ongepland" <%= reis.status === 'ongepland' ? 'selected' : '' %>>Ongepland</option>
+    </select>
+
+    <label for="prijs">Prijs (€):</label>
+    <input type="number" id="prijs" name="prijs" step="0.01" value="<%= reis.prijs %>" required>
+
+    <button type="submit">Update</button>
+</form>
+
+<%- include("partials/footer") %>

@@ -1,13 +1,19 @@
 import express from "express";
 import { Journeys } from "./interfaces/journeys";
-import { connect, getJourneys, getJourneyById, updateJourney } from "./database";
+import { connect, getJourneys, getJourneyById, updateJourney,  login, createNewUser} from "./database";
+import { User } from "./interfaces/users";
+import session from "./session";
+import { secureMiddleware, secureMiddlewareAdmin } from "./secureMiddleware";
 import ejs from "ejs";
+import dotenv from 'dotenv';
+dotenv.config();
 
 const app = express();
 
 app.set("view engine", "ejs");
-app.set("port", 3001);
+app.set("port", 3005);
 
+app.use(session);
 app.use(express.static("public"));
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
@@ -15,7 +21,7 @@ app.use(express.json());
 let journeysList: Journeys[] = [];
 let countries: string[] = [];
 
-app.get("/", async (req, res) => {
+app.get("/", secureMiddleware, async (req, res) => {
     journeysList = await getJourneys();
     const sortField = typeof req.query.sortField === "string" ? req.query.sortField : "land";
     const sortDirection = typeof req.query.sortDirection === "string" ? req.query.sortDirection : "laag-hoog";
@@ -70,6 +76,7 @@ app.get("/", async (req, res) => {
         data: [],
     });
 });
+
 app.post("/", async (req, res) => {
     let nameCountry: string = req.body.q.toLowerCase();
     let journeysByCountry = journeysList.filter(journey => journey.country.toLowerCase().includes(nameCountry));
@@ -100,43 +107,35 @@ app.post("/", async (req, res) => {
         q: nameCountry
     });
 });
-app.get("/searchCountries",(req,res)=>
-    {
-        res.render("searchCountries",
-            {
-                list:countries,
-                q:"",
-                data:[],
-            }
-        )
+
+app.get("/searchCountries", (req, res) => {
+    res.render("searchCountries", {
+        list: countries,
+        q: "",
+        data: [],
+    });
 });
 
-
-
-
-app.post("/searchCountries",(req,res)=>{
-    let nameCountry:string=req.body.q;
-    let filteredJourneys:Journeys[]=[];
-    for(let journey of journeysList){
-        if(journey.country.toLowerCase().includes(nameCountry.toLowerCase()))
-            {
-                filteredJourneys.push(journey)
-            }
+app.post("/searchCountries", (req, res) => {
+    let nameCountry: string = req.body.q;
+    let filteredJourneys: Journeys[] = [];
+    for (let journey of journeysList) {
+        if (journey.country.toLowerCase().includes(nameCountry.toLowerCase())) {
+            filteredJourneys.push(journey);
+        }
     }
-    res.render("searchCountries",
-        {
-            list:countries,
-            data:filteredJourneys,
-            q:nameCountry
-        })
+    res.render("searchCountries", {
+        list: countries,
+        data: filteredJourneys,
+        q: nameCountry
+    });
 });
 
-
-
-app.get("/allJourneys", async(req,res)=>{
+app.get("/allJourneys", async (req, res) => {
     const journeys = await getJourneys();  // Zorg ervoor dat getJourneys() alle reizen ophaalt
     res.render("allJourneys", { journeys });
 })
+
 app.get("/accommodations", async (req, res) => {
     const journeys = await getJourneys(); // Zorg ervoor dat deze functie bestaat en werkt
     res.render("accommodations", {
@@ -207,7 +206,57 @@ app.post("/journey/:id/edit", async (req, res) => {
     }
 });
 
+// Login and Logout
+app.get("/login", (req, res) => {
+    let message1 = { type: "Hey, ", message: "log je hier in aub" };
+    res.render("login", {
+        message: message1,
+    });
+});
 
+app.post("/login", async (req, res) => {
+    const email: string = req.body.email;
+    const password: string = req.body.password;
+    try {
+        let user: User = await login(email, password);
+        delete user.password;
+        req.session.user = user;
+        res.redirect("/");
+    } catch (e: any) {
+        let message1 = { type: "Hey,", message: " er is iets fout gegaan." };
+        res.render("login", {
+            message: message1,
+        });
+    }
+});
+
+app.get("/logout", async (req, res) => {
+    req.session.destroy(() => {
+        res.redirect("/login");
+    });
+});
+
+// Register
+app.get("/register", (req, res) => {
+    res.render("register");
+});
+
+app.post("/register", async (req, res) => {
+    const email: string = req.body.email;
+    const password: string = req.body.password;
+    try {
+        await createNewUser(email, password);
+        let message1 = { type: "Hey,", message: " registratie is gelukt. Log je nu in" };
+        res.render("login", {
+            message: message1,
+        });
+    } catch (e) {
+        let message1 = { type: "Hey,", message: "gebruiker bestaat reeds" };
+        res.render("login", {
+            message: message1,
+        });
+    }
+});
 
 app.listen(app.get("port"), async () => {
     await connect();

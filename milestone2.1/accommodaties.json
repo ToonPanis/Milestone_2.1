@@ -85,10 +85,9 @@
     ,
     {
         "id": 13,
-            "name": "Palacio del Inka, a Luxury Collection Hotel",
-            "rank": 4.8,
-            "img": "",
-            "adress": "Plazoleta Santo Domingo No 259, Cusco, Peru"
+        "naam": "Palacio del Inka, a Luxury Collection Hotel",
+        "beoordeling": 4.8,
+        "adres": "Plazoleta Santo Domingo No 259, Cusco, Peru"
     }
 
 ]

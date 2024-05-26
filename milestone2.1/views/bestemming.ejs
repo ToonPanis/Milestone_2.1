@@ -1,5 +1,6 @@
-<%-include ("partials/header")%>
-<form method="POST" action="/bestemmingen"> <!-- Correctie in de actie URL -->
+<%- include("partials/header") %>
+
+<form method="POST" action="/bestemmingen">
     <label for="q">Zoek op Bestemming: </label>
     <select name="q">
         <% for(let i = 0; i < list.length; i++) { %>
@@ -9,7 +10,7 @@
     <button type="submit">Zoek</button>
 </form>
 
-<% if (data) { %> <!-- Voeg controle toe om te controleren of data bestaat -->
+<% if (data) { %>
     <h1><%= data.bestemming %></h1>
     <figure><img src="<%= data.afbeelding %>" style="display: block; margin-left: auto; margin-right: auto;" height="450px"></figure>
     <ul>
@@ -19,7 +20,8 @@
         <li>Status: <%= data.status %></li>
         <li>Prijs: €<%= data.prijs %></li>
         <button><a href="http://localhost:3000/bestemming/<%= data.accommodatie.id %>/accommodatie">Info accommodatie</a></button>
+        <button><a href="http://localhost:3000/bestemming/<%= data.accommodatie.id %>/editBestemming">Edit</a></button>
     </ul>
 <% } %>
 
-<%-include ("partials/footer")%>
+<%- include("partials/footer") %>

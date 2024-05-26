@@ -1,0 +1,19 @@
+<%- include("partials/header") %>
+
+<h1>Alle Reizen</h1>
+
+<div class="journeys-container">
+    <% for (let journey of journeys) { %>
+        <a href="/journey/<%= journey.id %>" class="journey-card">
+            <img src="<%= journey.img %>" alt="Image of <%= journey.city %>">
+            <h2><%= journey.country %> - <%= journey.city %></h2>
+            <p><strong>Startdatum:</strong> <%= journey.startDate %></p>
+            <p><strong>Duur (dagen):</strong> <%= journey.duration %></p>
+            <p><strong>Prijs (€):</strong> <%= journey.price %></p>
+            <p><strong>Status:</strong> <%= journey.status %></p>
+            <p><strong>Betaald:</strong> <%= journey.paid %></p>
+        </a>
+    <% } %>
+</div>
+
+<%- include("partials/footer") %>

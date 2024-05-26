@@ -1,0 +1,18 @@
+<%- include("partials/header") %>
+
+<h1>Alle Accommodaties</h1>
+
+<div class="accommodations-container">
+    <% journeys.forEach(journey => { %>
+        <div class="accommodation-card">
+            <a href="/accommodation/<%= journey.accommodation.id %>">
+                <img src="<%= journey.img %>" alt="Image of <%= journey.accommodation.name %>" class="accommodation-img">
+                <h2><%= journey.accommodation.name %></h2>
+                <p><strong>Adres:</strong> <%= journey.accommodation.adress %></p>
+                <p><strong>Rank:</strong> <%= journey.accommodation.rank %></p>
+            </a>
+        </div>
+    <% }) %>
+</div>
+
+<%- include("partials/footer") %>

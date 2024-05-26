@@ -1,6 +1,4 @@
-<%- include("partials/header") %>
-
-<h1>Journeys</h1>
+<%- include ("partials/header") %>
 
 <form action="/" method="get">
     <select name="sortField">
@@ -16,17 +14,10 @@
     <button type="submit">Sorteren</button>
 </form>
 
-<form action="/" method="post">
-    <label for="q">Zoek op land: </label>
-    <input type="search" name="q" id="q" value="<%= q %>"/>
-    <button type="submit">Zoek</button>
-</form>
-
 <table>
     <thead>
         <tr>
-            <th>Land</th>
-            <th>Stad</th>
+            <th>Bestemming</th>
             <th>Startdatum</th>
             <th>Duur (dagen)</th>
             <th>Prijs (€)</th>
@@ -34,17 +25,17 @@
         </tr>
     </thead>
     <tbody>
-        <% for (let journey of journeys) { %>
+        <% for (let reis of reizen) { %>
             <tr>
-                <td><a href="/journey/<%= journey.id %>"><%= journey.country %></a></td>
-                <td><a href="/journey/<%= journey.id %>"><%= journey.city %></a></td>
-                <td><%= journey.startDate %></td>
-                <td><%= journey.duration %></td>
-                <td><%= journey.price %></td>
-                <td><%= journey.status %></td>
+                <td><a href="http://localhost:3000/bestemming/<%= reis.accommodatie.id %>"><%= reis.bestemming %></a></td>
+                <td><%= reis.startDatum %></td>
+                <td><%= reis.duur %></td>
+                <td><%= reis.prijs %></td>
+                <td><%= reis.status %></td>
             </tr>
         <% } %>
     </tbody>
+    
 </table>
 
-<%- include("partials/footer") %>
+<%- include ("partials/footer") %>

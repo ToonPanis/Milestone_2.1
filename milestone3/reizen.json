@@ -1,0 +1,275 @@
+[
+    {
+        "id": "101",
+        "country": "Japan",
+        "city":"Tokio",
+        "discription": "Ervaar de bruisende straten en levendige cultuur van Tokio.",
+        "duration": 7,
+        "paid": true,
+        "price": 2100,
+        "startDate": "2024-05-20",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-aleksandar-pasaric-2506923.jpg",
+        "status": "gepland",
+        "activities": ["tempels bezoeken", "buurten verkennen", "lokale keuken uitproberen"],
+        "accommodation": 
+            {
+                "id": 1,
+                "name": "Tokyo Hilton",
+                "rank": 4.5,
+                "img": "",
+                "adress": "1-8-1 Nishi-Shinjuku, Shinjuku-ku, Tokyo 160-0023, Japan"
+            }
+    },
+    {
+        "id": "102",
+        "country": "Peru",
+        "city":"Machu Picchu",
+        "discription": "Maak een reis naar de oude ruïnes van Machu Picchu.",
+        "duration": 5,
+        "paid": true,
+        "price": 2000,
+        "startDate": "2024-09-10",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-eddie-kiszka-16973650.jpg",
+        "status": "gepland",
+        "activities": ["de Inca Trail wandelen", "de ruïnes verkennen", "genieten van adembenemende uitzichten"],
+        "accommodation": 
+        {
+            "id": 2,
+            "name": "Machu Picchu Pueblo Hotel",
+            "rank": 4.8,
+            "img": "",
+            "adress": "Pueblo de Machu Picchu, Aguas Calientes 08681, Peru"
+        }
+    },
+    {
+        "id": "103",
+        "country": "Frankrijk",
+        "city":"Parijs",
+        "discription": "Ontdek de romantiek en charme van Parijs.",
+        "duration": 4,
+        "paid": true,
+        "price": 1900,
+        "startDate": "2024-07-15",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-pixabay-2363.jpg",
+        "status": "gepland",
+        "activities": ["de Eiffeltoren bezoeken", "het Louvre Museum verkennen", "een cruise maken op de Seine"],
+        "accommodation": 
+        {
+            "id": 3,
+            "name": "Hotel Le Meurice",
+            "rank": 4.7,
+            "img": "",
+            "adress": "228 Rue de Rivoli, 75001 Parijs, Frankrijk"
+        }
+    },
+    {
+        "id": "104",
+        "country": "Indonesië",
+        "city":"Bali",
+        "discription": "Ontspan op prachtige stranden en ervaar de Balinese cultuur.",
+        "duration": 10,
+        "paid": false,
+        "price": 2150,
+        "startDate": "2024-08-20",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-guillaume-meurice-1544351.jpg",
+        "status": "gepland",
+        "activities": ["surfen", "bezoek Ubud Monkey Forest", "verken tempels"],
+        "accommodation": 
+        {
+            "id": 4,
+            "name": "Four Seasons Resort Bali at Sayan",
+            "rank": 4.9,
+            "img": "",
+            "adress": "Sayan, Ubud, Gianyar, Bali 80571, Indonesië"
+        }
+    },
+    {
+        "id": "105",
+        "country": "Italië",
+        "city":"Rome",
+        "discription": "Onderdompelen in de oude geschiedenis en heerlijke keuken in Rome.",
+        "duration": 6,
+        "paid": true,
+        "price": 1200,
+        "startDate": "2024-09-30",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-davi-pimentel-2064827.jpg",
+        "status": "gepland",
+        "activities": ["het Colosseum verkennen", "bezoek Vaticaanstad", "geniet van gelato"],
+        "accommodation": 
+        {
+            "id": 5,
+            "name": "Hotel Eden",
+            "rank": 4.6,
+            "img": "",
+            "adress": "Via Ludovisi, 49, 00187 Roma RM, Italië"
+        }
+    },
+    {
+        "id": "106",
+        "country": "Griekenland",
+        "city":"Santorini",
+        "discription": "Ervaar adembenemende zonsondergangen en prachtig uitzicht op de Egeïsche Zee.",
+        "duration": 8,
+        "paid": true,
+        "price": 2800,
+        "startDate": "2024-10-15",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-jimmy-teoh-1010640.jpg",
+        "status": "gepland",
+        "activities": ["verken Oia", "bezoek Red Beach", "maak een boottocht naar Nea Kameni"],
+        "accommodation": 
+        {
+            "id": 6,
+            "name": "Katikies Hotel",
+            "rank": 4.9,
+            "img": "",
+            "adress": "Oia, Santorini, 84702, Griekenland"
+        }
+    },
+    {
+        "id": "107",
+        "country": "Australië",
+        "city":"Sidney",
+        "discription": "Ontdek iconische bezienswaardigheden en geniet van de relaxte Australische levensstijl.",
+        "duration": 12,
+        "paid": true,
+        "price": 3200,
+        "startDate": "2025-01-05",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-rijan-hamidovic-2193300.jpg",
+        "status": "gepland",
+        "activities": ["beklim de Sydney Harbour Bridge", "bezoek Bondi Beach", "verken het Sydney Opera House"],
+        "accommodation": 
+        {
+            "id": 7,
+            "name": "Park Hyatt Sydney",
+            "rank": 4.8,
+            "img": "",
+            "adress": "7 Hickson Road, The Rocks, Sydney NSW 2000, Australië"
+        }
+    },
+    {
+        "id": "108",
+        "country": "Zuid-Afrika",
+        "city":"Kaapstad",
+        "discription": "Ervaar de prachtige natuurlijke schoonheid en levendige culturele diversiteit.",
+        "duration": 9,
+        "paid": true,
+        "price": 2300,
+        "startDate": "2025-03-20",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-scott-webb-136721.jpg",
+        "status": "niet gepland",
+        "activities": ["verken de Tafelberg", "bezoek Robbeneiland", "maak een wijntour in Stellenbosch"],
+        "accommodation": 
+        {
+            "id": 8,
+            "name": "One&Only Cape Town",
+            "rank": 4.7,
+            "img": "",
+            "adress": "Dock Rd, Victoria & Alfred Waterfront, Kaapstad, 8001, Zuid-Afrika"
+        }
+    },
+    {
+        "id": "109",
+        "country": "Brazilië",
+        "city":"Rio de Janeiro",
+        "discription": "Ervaar de energie en opwinding van het carnaval van Rio en de prachtige stranden.",
+        "duration": 7,
+        "paid": false,
+        "price": 2000,
+        "startDate": "2025-02-20",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-photo-2559997.jpeg",
+        "status": "gepland",
+        "activities": ["bezoek Christus de Verlosser", "ontspan op Copacabana Beach", "verken het Nationaal Park Tijuca"],
+        "accommodation": 
+        {
+            "id": 9,
+            "name": "Belmond Copacabana Palace",
+            "rank": 4.7,
+            "img": "",
+            "adress": "Av. Atlântica, 1702 - Copacabana, Rio de Janeiro - RJ, 22021-001, Brazilië"
+        }
+    },
+    {
+        "id": "110",
+        "country": "Spanje",
+        "city":"Barcelona",
+        "discription": "Laat je onderdompelen in de levendige cultuur en architectuur van Barcelona.",
+        "duration": 5,
+        "paid": true,
+        "price": 1800,
+        "startDate": "2025-09-15",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-aleksandar-pasaric-1386444.jpg",
+        "status": "gepland",
+        "activities": ["verken Park Güell", "bezoek de Sagrada Família", "wandeling langs La Rambla"],
+        "accommodation": 
+        {
+            "id": 10,
+            "name": "Hotel Arts Barcelona",
+            "rank": 4.6,
+            "img": "",
+            "adress": "Carrer de la Marina, 19-21, 08005 Barcelona, Spanje"
+        }
+    },
+    {
+        "id": "111",
+        "country": "Verenigde Arabische Emiraten",
+        "city":"Dubai",
+        "discription": "Ervaar luxe en moderniteit in het hart van de woestijn.",
+        "duration": 5,
+        "paid": true,
+        "price": 2900,
+        "startDate": "2025-06-20",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-mo-ismail-3763190.jpg",
+        "status": "niet gepland",
+        "activities": ["bezoek de Burj Khalifa", "verken de Dubai Mall", "maak een woestijnsafari"],
+        "accommodation": 
+        {
+            "id": 11,
+            "name": "Burj Al Arab Jumeirah",
+            "rank": 4.9,
+            "img": "",
+            "adress": "Jumeirah St - Dubai - Verenigde Arabische Emiraten"
+        }
+    },
+    {
+        "id": "112",
+        "country": "IJsland",
+        "city":"Reykjavik",
+        "discription": "Ontdek prachtige natuurlijke landschappen en het magische Noorderlicht.",
+        "duration": 7,
+        "paid": true,
+        "price": 1100,
+        "startDate": "2025-09-10",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-greta-soave-7349506.jpg",
+        "status": "gepland",
+        "activities": ["verken de Golden Circle", "ontspan in de Blue Lagoon", "jaag op het Noorderlicht"],
+        "accommodation": 
+        {
+            "id": 12,
+            "name": "ION Adventure Hotel",
+            "rank": 4.7,
+            "img": "",
+            "adress": "Nesjavellir, 801 Selfoss, IJsland"
+        }
+    },
+    {
+        "id": "113",
+        "country": "Peru",
+        "city": "Cusco",
+        "discription": "Ontdek de oude hoofdstad van het Inca-rijk en toegangspoort tot Machu Picchu.",
+        "duration": 4,
+        "paid": false,
+        "price": 2700,
+        "startDate": "2025-11-15",
+        "img": "https://raw.githubusercontent.com/ToonPanis/Milestone-ToonPanis/main/milestone1/images/pexels-julia-volk-5198285.jpg",
+        "status": "niet gepland",
+        "activities": ["verken Plaza de Armas", "bezoek Sacsayhuamán", "maak een stadswandeling"],
+        "accommodation": 
+        {
+            "id": 13,
+            "name": "Palacio del Inka, a Luxury Collection Hotel",
+            "rank": 4.8,
+            "img": "",
+            "adress": "Plazoleta Santo Domingo No 259, Cusco, Peru"
+        }
+    }
+]

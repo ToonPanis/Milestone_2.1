@@ -1,127 +1,171 @@
-import express, { Express } from "express";
-import {Reis} from "./interfaces/Reis";
-import { connect,getReizen,loadReizenFromApi} from "./database";
-import dotenv from "dotenv";
-import readline from "readline-sync";
+import express from "express";
+import { Journeys } from "./interfaces/journeys";
+import { connect, getJourneys, getJourneyById, updateJourney } from "./database";
 import ejs from "ejs";
 
-
-const app : Express = express();
+const app = express();
 
 app.set("view engine", "ejs");
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.set("port", 3001);
+
 app.use(express.static("public"));
-app.set("port", 3000);
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
 
-let reizen:Reis[] = [];
-let bestemmingen:string[] = [];
+let journeysList: Journeys[] = [];
+let countries: string[] = [];
 
-app.get("/",async (req, res) => {
-    reizen = await getReizen();
-    const sortField = typeof req.query.sortField === "string" ? req.query.sortField : "bestemming";
+app.get("/", async (req, res) => {
+    journeysList = await getJourneys();
+    const sortField = typeof req.query.sortField === "string" ? req.query.sortField : "land";
     const sortDirection = typeof req.query.sortDirection === "string" ? req.query.sortDirection : "laag-hoog";
     
-    let sortedReizen = [...reizen].sort((a, b) =>  {
-            if (sortField === "bestemming") {
-                return sortDirection === "laag-hoog" ? a.bestemming.localeCompare(b.bestemming) : b.bestemming.localeCompare(a.bestemming);
-            } else if (sortField === "startDatum") {
-                return sortDirection === "laag-hoog" ? a.startDatum.localeCompare(b.startDatum) : b.startDatum.localeCompare(a.startDatum);
-            } else if (sortField === "duur") {
-                return sortDirection === "laag-hoog" ? a.duur - b.duur : b.duur - a.duur;
-            } else if (sortField === "prijs") {
-                return sortDirection === "laag-hoog" ? a.prijs - b.prijs : b.prijs - a.prijs;
-            } else if (sortField === "status") {
-                return sortDirection === "laag-hoog" ? a.status.localeCompare(b.status) : b.status.localeCompare(a.status);
-            } else {
-                return 0;
-            }
+    let sortedJourneys = [...journeysList].sort((a, b) => {
+        if (sortField === "land") {
+            return sortDirection === "laag-hoog" ? a.country.localeCompare(b.country) : b.country.localeCompare(a.country);
+        } else if (sortField === "stad") {
+            return sortDirection === "laag-hoog" ? a.city.localeCompare(b.city) : b.city.localeCompare(a.city);
+        } else if (sortField === "startDatum") {
+            return sortDirection === "laag-hoog" ? a.startDate.localeCompare(b.startDate) : b.startDate.localeCompare(a.startDate);
+        } else if (sortField === "prijs") {
+            return sortDirection === "laag-hoog" ? a.price - b.price : b.price - a.price;
+        } else if (sortField === "duur") {
+            return sortDirection === "laag-hoog" ? a.duration - b.duration : b.duration - a.duration;
+        } else if (sortField === "status") {
+            return sortDirection === "laag-hoog" ? a.status.localeCompare(b.status) : b.status.localeCompare(a.status);
+        } else {
+            return 0;
+        }
     });
 
-    for(let reis of reizen){
-        if(bestemmingen.includes(reis.bestemming) == false)
-            {
-                bestemmingen.push(reis.bestemming)
-            }
+    for (let journey of journeysList) {
+        if (!countries.includes(journey.country)) {
+            countries.push(journey.country);
+        }
     }
 
     const sortFields = [
-        { value: 'bestemming', text: 'Bestemming', selected: sortField === 'bestemming' ? 'selected' : ''},
-        { value: 'startdatum', text: 'Startdatum', selected: sortField === 'startdatum' ?  'selected' : ''},
-        { value: 'duur', text: 'Duur', selected: sortField === 'duur' ? 'selected' : ''},
-        { value: 'prijs', text: 'Prijs', selected: sortField === 'prijs' ? 'selected' : ''},
-        { value: 'status', text: 'Status', selected: sortField === 'status' ? 'selected' : ''}
+        { value: 'land', text: 'land', selected: sortField === 'land' ? 'selected' : '' },
+        { value: 'stad', text: 'stad', selected: sortField === 'stad' ? 'selected' : '' },
+        { value: 'startdatum', text: 'Startdatum', selected: sortField === 'startdatum' ? 'selected' : '' },
+        { value: 'duur', text: 'Duur', selected: sortField === 'duur' ? 'selected' : '' },
+        { value: 'prijs', text: 'Prijs', selected: sortField === 'prijs' ? 'selected' : '' },
+        { value: 'status', text: 'Status', selected: sortField === 'status' ? 'selected' : '' }
     ];
     
     const sortDirections = [
-        { value: 'hoog-laag', text: 'Hoog-laag', selected: sortDirection === 'hoog-laag' ? 'selected' : ''},
-        { value: 'laag-hoog', text: 'Laag-hoog', selected: sortDirection === 'laag-hoog' ? 'selected' : ''}
+        { value: 'hoog-laag', text: 'Hoog-laag', selected: sortDirection === 'hoog-laag' ? 'selected' : '' },
+        { value: 'laag-hoog', text: 'Laag-hoog', selected: sortDirection === 'laag-hoog' ? 'selected' : '' }
     ];
 
     res.render("index", {
-        reizen: sortedReizen,
+        journeys: sortedJourneys,
         sortField: sortField,
         sortDirection: sortDirection,
         sortFields: sortFields,
         sortDirections: sortDirections,
-        bestemming:"",
-        q:""
+        list: countries,
+        bestemming: "",
+        q: "",
+        data: [],
     });
 });
+app.post("/", async (req, res) => {
+    let nameCountry: string = req.body.q.toLowerCase();
+    let journeysByCountry = journeysList.filter(journey => journey.country.toLowerCase().includes(nameCountry));
 
-app.post("/",(req,res)=>{
-    let naamBestemming:string=req.body.q;
-    let byBestemming=[...reizen].filter(reis=>reis.bestemming.toLowerCase().includes(naamBestemming.toLowerCase()));
-    res.render("index",
-    {
-        reizen:byBestemming,
-        sortFields: null,
-        sortDirections: null,
+    const sortFields = [
+        { value: 'land', text: 'land', selected: 'selected' },
+        { value: 'stad', text: 'stad', selected: '' },
+        { value: 'startdatum', text: 'Startdatum', selected: '' },
+        { value: 'duur', text: 'Duur', selected: '' },
+        { value: 'prijs', text: 'Prijs', selected: '' },
+        { value: 'status', text: 'Status', selected: '' }
+    ];
+
+    const sortDirections = [
+        { value: 'hoog-laag', text: 'Hoog-laag', selected: '' },
+        { value: 'laag-hoog', text: 'Laag-hoog', selected: 'selected' }
+    ];
+
+    res.render("index", {
+        sortFields: sortFields,
+        sortDirections: sortDirections,
         sortField: null,
         sortDirection: null,
-        bestemming:naamBestemming,
-        q:naamBestemming
+        journeys: journeysByCountry,
+        country: nameCountry,
+        list: countries,
+        data: journeysByCountry,
+        q: nameCountry
     });
-
 });
-
-app.get("/bestemmingen",(req,res)=>
+app.get("/searchCountries",(req,res)=>
     {
-        res.render("bestemmingen",
+        res.render("searchCountries",
             {
-                list:bestemmingen,
+                list:countries,
                 q:"",
                 data:[],
             }
         )
-    });
+});
 
-app.post("/bestemmingen",(req,res)=>{
-    let naamBestemming:string=req.body.q;
-    let filteredReizen:Reis[]=[];
-    for(let reis of reizen){
-        if(reis.bestemming.includes(naamBestemming))
+
+
+
+app.post("/searchCountries",(req,res)=>{
+    let nameCountry:string=req.body.q;
+    let filteredJourneys:Journeys[]=[];
+    for(let journey of journeysList){
+        if(journey.country.toLowerCase().includes(nameCountry.toLowerCase()))
             {
-                filteredReizen.push(reis)
+                filteredJourneys.push(journey)
             }
     }
-    res.render("bestemmingen",
+    res.render("searchCountries",
         {
-            list:bestemmingen,
-            data:filteredReizen,
-            q:naamBestemming
+            list:countries,
+            data:filteredJourneys,
+            q:nameCountry
         })
 });
 
-app.get("/bestemming/:id", (req, res) => {
-    let search = parseInt(req.params.id);
-    let found = false;
-    for (let reis of reizen) {
-        if (reis.accommodatie.id === search) {
+
+
+app.get("/allJourneys", async(req,res)=>{
+    const journeys = await getJourneys();  // Zorg ervoor dat getJourneys() alle reizen ophaalt
+    res.render("allJourneys", { journeys });
+})
+app.get("/accommodations", async (req, res) => {
+    const journeys = await getJourneys(); // Zorg ervoor dat deze functie bestaat en werkt
+    res.render("accommodations", {
+        journeys
+    });
+});
+
+app.get("/journey/:id", async (req, res) => {
+    const search: string = req.params.id;
+    const journey = await getJourneyById(search);
+    if (journey) {
+        res.render("journey", {
+            list: countries,
+            data: journey
+        });
+    } else {
+        res.render("404");
+    }
+});
+
+app.get("/journey/:id/accommodation", (req, res) => {
+    let search: number = parseInt(req.params.id);
+    let found: boolean = false;
+    for (let journey of journeysList) {
+        if (journey.accommodation.id === search) {
             found = true;
-            res.render("bestemming", {
-                list: bestemmingen,
-                data: reis
+            res.render("accommodation", {
+                list: countries,
+                data: journey
             });
             break;
         }
@@ -131,87 +175,44 @@ app.get("/bestemming/:id", (req, res) => {
     }
 });
 
+app.get("/journey/:id/edit", async (req, res) => {
+    const id = req.params.id;
+    const journey = await getJourneyById(id);
 
-app.get("/bestemming/:id/accommodatie",(req,res)=>{
-    let search:number = parseInt(req.params.id);
-    let found:boolean=false;
-    for (let i:number=0;i<reizen.length;i++)
-        {
-            if (reizen[i].accommodatie.id==search)
-                {
-                    found=true;
-                    res.render("accommodatieInfo",
-                    {
-                        list:bestemmingen,
-                        data:reizen[i]
-                        
-                    })
-                    break;
-                }
-        }
-    if (found == false)
-    {
+    if (journey) {
+        res.render("editJourney", { journey });
+    } else {
         res.render("404");
     }
 });
 
-app.get("/bestemming",(req,res)=> {
-    res.render("bestemming", {
-        list: bestemmingen,
-        data: reizen[0]
-    });
-});
+app.post("/journey/:id/edit", async (req, res) => {
+    const id = req.params.id;
+    const { duration, price, startDate, status } = req.body;
 
-app.use("/bestemming",(req,res)=>{
-    let zoekBestemming:string=req.body.q;
-    let bestemmingId:Reis=reizen[0];
+    const updatedJourney = {
+        duration: parseInt(duration),
+        price: parseFloat(price),
+        startDate,
+        status
+    };
+
+    const result = await updateJourney(id, updatedJourney);
     
-    for (let reis of reizen) {
-        if (zoekBestemming === reis.bestemming) {
-            bestemmingId= reis;
-        }
+    if (result.modifiedCount > 0) {
+        res.redirect(`/journey/${id}`);
+    } else {
+        const journey = await getJourneyById(id);
+        res.render("editJourney", { journey });
     }
-    
-    res.render("bestemming",
-        {
-            list:reizen,
-            data:bestemmingId,
-            q:null
-        })
-
 });
 
 
- app.get("/reizen",(req,res)=>
-{
-    let data:Reis[]=[];
-    res.render("reizen",
-        {
-            data:data,
-            q:""
-        }
-    )
-});
 
-app.post("/reizen",(req,res)=>
-{
-    let zoekStatus=req.body.q;
-    let naamStatus:Reis[]=[];
-    for (let reis of reizen) {
-        if (reis.status.toLowerCase().includes(zoekStatus.toLowerCase()) || reis.omschrijving.toLowerCase().includes(zoekStatus.toLowerCase())) {
-            naamStatus.push(reis);
-        }
-    }
-    
-        res.render("reizen",
-        {
-            data: naamStatus,
-            q:zoekStatus
-        }
-    )
-});
-
-app.listen(app.get("port"), async() => {
+app.listen(app.get("port"), async () => {
     await connect();
+    countries = [...new Set(journeysList.map(journey => journey.country))];
     console.log("Server started on http://localhost:" + app.get('port'));
 });
+
+export {}
