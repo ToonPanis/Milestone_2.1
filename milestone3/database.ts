@@ -4,8 +4,9 @@ import {Journeys} from "./interfaces/journeys";
 dotenv.config();
 
 
-export const client = new MongoClient("mongodb+srv://toonpanis:Money420@webontwikkeling.fmbnoc9.mongodb.net/");
-export const collection:Collection<Journeys>=client.db("WebontwikkelingTaak2").collection<Journeys>("Milestone3");
+export const client = new MongoClient(
+  "mongodb+srv://toonpanis:fLAy0S6fk5LQElHT@webontwikkeling.fmbnoc9.mongodb.net/WebontwikkelingTaak2?retryWrites=true&w=majority"
+);export const collection:Collection<Journeys>=client.db("WebontwikkelingTaak2").collection<Journeys>("Milestone3");
 
 async function exit() {
     try {

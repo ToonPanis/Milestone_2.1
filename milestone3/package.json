@@ -1,11 +1,11 @@
 {
-  "name": "milestone2",
+  "name": "milestone3",
   "version": "1.0.0",
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "jest",
-    "start": "nodemon index.ts"
+    "dev": "nodemon --exec ts-node index.ts",
+    "start": "ts-node index.ts"
   },
   "author": "",
   "license": "ISC",
