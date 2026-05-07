@@ -7,19 +7,33 @@
     <title>Bestemmingen</title>
 </head>
 <body>
-    <header>
-        <h1>Mijn Reizen</h1>
+    <header class="site-header">
+        <div class="header-inner">
+            <h1>Travel Dairy App</h1>
+        </div>
     </header>
-    <aside>
-        <nav>
-        <ul>
-            <li><a class="nav-button" href="http://localhost:3001/">Home</a></li>
-            <li><a class="nav-button" href="http://localhost:3001/allJourneys">Alle reizen</a></li>
-            <li><a class="nav-button" href="http://localhost:3001/accommodations">Alle Accommodaties</a></li>
-            <li><a class="nav-button" href="http://localhost:3001/plannedOrPaid">gepland of betaald?</a></li>
-            <li><a class="nav-button" href="http://localhost:3001/searchCountries">Zoek land</a></li>
-        </ul>
+
+    <nav class="main-nav">
+        <div class="nav-inner">
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/allJourneys">Alle reizen</a></li>
+                <li><a href="/accommodations">Accommodaties</a></li>
+                <li><a href="/plannedOrPaid">Betaald / Gepland</a></li>
+                <li><a href="/addJourney">Reis toevoegen</a></li>
+                <li><a href="/searchCountries">Zoeken</a></li>
+            </ul>
+
+            
+
+            <div class="nav-auth">s
+                <% if (locals.user) { %>
+                    <a href="/logout">Logout</a>
+                <% } else { %>
+                    <a href="/login">Login</a>
+                    <a href="/register">Register</a>
+                <% } %>
+            </div>
+        </div>
     </nav>
-    </aside>
-    </aside>
     <main>

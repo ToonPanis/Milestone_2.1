@@ -1,22 +1,61 @@
-<%-include ("partials/header")%>
-<form method="POST">
-    <label for="q">Zoek op Bestemming: </label>
-    <select name="q">
-        <% for(let item of list) { %>
-            <option value="<%= item %>"><%= item %></option>
-        <% } %>
-    </select>
-    <button type="submit">Zoek</button>
-</form>
-<h1><%=data.city%>, <%=data.country%></h1>
-<div class="s-container">
-    
-    <a href="/journey/<%= data.id %>" class="journey-card">
-        <img src="<%= data.img %>" alt="Image of <%= data.city %>">
-        <h2><%= data.country %> - <%= data.accommodation.name %></h2>
-        <p><strong>Rank:</strong> <%= data.accommodation.rank %></p>
-        <p><strong>adres:</strong> <%= data.accommodation.adress %></p> 
-    </a>
-    <button><a href="http://localhost:3001/journey/<%= data.id %>">Terug naar bestemming</a></button>
-</div>
-<%-include ("partials/footer")%>
+<%- include("partials/header") %>
+
+<section class="page-title-section">
+    <h2 class="page-title">Accommodatie details</h2>
+    <p class="page-subtitle">Meer informatie over dit verblijf</p>
+</section>
+
+<main class="main-content">
+
+
+    <div class="journey-detail">
+        <img src="<%= data.img %>" alt="Image of <%= data.accommodation.name %>">
+
+        <div class="detail-content">
+            <h1><%= data.accommodation.name %></h1>
+
+            <p>
+                <strong>Bestemming:</strong>
+                <%= data.city %>, <%= data.country %>
+            </p>
+
+            <div class="detail-info">
+                <div class="info-box">
+                    <strong>Adres</strong>
+                    <span><%= data.accommodation.adress %></span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Rank</strong>
+                    <span><%= data.accommodation.rank %></span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Stad</strong>
+                    <span><%= data.city %></span>
+                </div>
+
+                <div class="info-box">
+                    <strong>Land</strong>
+                    <span><%= data.country %></span>
+                </div>
+            </div>
+
+            <div class="detail-actions mt-20">
+                <a class="btn" href="/journey/<%= data.id %>">Terug naar bestemming</a>
+                <a class="btn" href="/accommodations">Terug naar accommodaties</a>
+                <form
+                action="/accommodation/<%= data.accommodation.id %>/delete"
+                method="POST"
+                onsubmit="return confirm('Ben je zeker dat je deze accommodatie wil verwijderen?')"
+            >
+                <button type="submit" class="btn delete-btn">
+                    Accommodatie verwijderen
+                </button>
+            </form>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include("partials/footer") %>

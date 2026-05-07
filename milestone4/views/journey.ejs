@@ -1,32 +1,75 @@
 <%- include("partials/header") %>
 
-<form method="POST">
-    <label for="q">Zoek op land: </label>
-    <select name="q">
-        <% for (let i = 0; i < list.length; i++) { %>
-            <option value="<%= list[i] %>"><%= list[i] %></option>
-        <% } %>
-    </select>
-    <button type="submit">Zoek</button>
-</form>
+<main class="main-content">
 
+    <section class="page-title-section">
+    <h2 class="page-title">Reis details</h2>
+    <p class="page-subtitle">Alle informatie over deze bestemming</p>
+</section>
 
-<div class="s-container">
     
-        <a href="http://localhost:3001/journey/<%= data.accommodation.id %>/accommodation%>" class="journey-card">
-            <img src="<%= data.img %>" alt="Image of <%= data.city %>">
-            <h2><%= data.country %> - <%= data.city %></h2>
-            <p><strong>Startdatum:</strong> <%= data.startDate %></p>
-            <p><strong>Duur (dagen):</strong> <%= data.duration %></p>
-            <p><strong>Prijs (€):</strong> <%= data.price %></p>
-            <p><strong>Status:</strong> <%= data.status %></p>
-            <p><strong>Beschrijving:</strong> <%= data.discription %></p>
-            <p><strong>Activiteiten:</strong> <%= data.activities %></p>
-            <p><strong>Betaald:</strong> <%= data.paid %></p>
-        </a>
-        <button><a href="http://localhost:3001/journey/<%= data.accommodation.id %>/accommodation">Info accommodatie</a></button>
-        <button><a href="/journey/<%= data.id %>/edit">Edit data</a></button>
-        <button><a href="http://localhost:3001/allJourneys">Terug</a></button>
-        
-</div>
+
+    <section>
+        <div class="journey-detail">
+            <% if (data.img) { %>
+                <img src="<%= data.img %>" alt="Image of <%= data.city %>">
+            <% } %>
+
+            <div class="detail-content">
+                <h1><%= data.country %> - <%= data.city %></h1>
+
+                <p><strong>Beschrijving:</strong> <%= data.description || data.discription %></p>
+
+                <div class="detail-info">
+                    <div class="info-box">
+                        <strong>Startdatum</strong>
+                        <span><%= data.startDate %></span>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Duur</strong>
+                        <span><%= data.duration %> dagen</span>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Prijs</strong>
+                        <span>€ <%= data.price %></span>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Status</strong>
+                        <span><%= data.status %></span>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Activiteiten</strong>
+                        <span><%= data.activities %></span>
+                    </div>
+
+                    <div class="info-box">
+                        <strong>Betaald</strong>
+                        <span><%= data.paid %></span>
+                    </div>
+                </div>
+
+                <div class="detail-actions mt-20">
+                    <a class="btn" href="/journey/<%= data.id %>/accommodation">Info accommodatie</a>
+                    <a class="btn" href="/journey/<%= data.id %>/edit">Edit data</a>
+                    <a class="btn" href="/allJourneys">Terug</a>
+                    <form
+                    action="/journey/<%= data.id %>/delete"
+                    method="POST"
+                    onsubmit="return confirm('Ben je zeker dat je deze reis wil verwijderen?')"
+                >
+                    <button type="submit" class="btn delete-btn">
+                        Reis verwijderen
+                    </button>
+                </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
 <%- include("partials/footer") %>

@@ -1,16 +1,49 @@
-<%- include ("partials/header") %>
+<%- include("partials/header") %>
 
-<div class="status-search-container">
-    <h2>Zoek op status</h2>
-    <form action="/plannedOrPaid" method="POST" class="status-search-form">
-        <label for="status" class="status-label">Status:</label>
-        <select name="status" id="status" class="status-select">
-            <% for (let status of statuses) { %>
-                <option value="<%= status %>"><%= status %></option>
+<main class="main-content">
+
+    <section class="page-title-section">
+        <h2 class="page-title">Betaald / Gepland</h2>
+        <p class="page-subtitle">Zoek reizen op status</p>
+    </section>
+
+    <div class="status-search-container">
+        <form action="/plannedOrPaid" method="POST" class="status-search-form">
+
+            <div>
+                <label for="status" class="status-label">Status</label>
+                <select name="status" id="status" class="status-select">
+                    <% for (let status of statuses) { %>
+                        <option value="<%= status %>">
+                            <%= status %>
+                        </option>
+                    <% } %>
+                </select>
+            </div>
+
+            <div>
+                <button type="submit">Zoek</button>
+            </div>
+
+        </form>
+    </div>
+
+    <% if (typeof journeys !== "undefined") { %>
+        <div class="journeys-container">
+            <% for (let journey of journeys) { %>
+                <a href="/journey/<%= journey.id %>" class="journey-card">
+                    <img src="<%= journey.img %>" alt="<%= journey.city %>">
+
+                    <div class="card-content">
+                        <h2><%= journey.country %> - <%= journey.city %></h2>
+                        <p><strong>Status:</strong> <%= journey.status %></p>
+                        <p><strong>Prijs:</strong> € <%= journey.price %></p>
+                    </div>
+                </a>
             <% } %>
-        </select>
-        <button type="submit" class="status-search-button">Zoek</button>
-    </form>
-</div>
+        </div>
+    <% } %>
 
-<%- include ("partials/footer") %>
+</main>
+
+<%- include("partials/footer") %>

@@ -1,0 +1,110 @@
+<%- include("partials/header") %>
+
+<main class="main-content">
+
+    <section class="page-title-section">
+        <h2 class="page-title">Nieuwe reis toevoegen</h2>
+        <p class="page-subtitle">
+            Voeg een nieuwe bestemming en accommodatie toe
+        </p>
+    </section>
+
+    <% if (success) { %>
+    <div class="success-message">
+        De reis is succesvol toegevoegd!
+    </div>
+    <% } %>     
+
+    <form action="/addJourney" method="POST" enctype="multipart/form-data">
+
+        <label for="img">Foto reis uploaden</label>
+        <input type="file" id="img" name="img" accept="image/*" required>
+
+        <label for="country">Land</label>
+        <input type="text" id="country" name="country" required>
+
+        <label for="city">Stad</label>
+        <input type="text" id="city" name="city" required>
+
+        <label for="discription">Beschrijving</label>
+        <textarea id="discription" name="discription" required></textarea>
+
+        <label for="duration">Duur (dagen)</label>
+        <input type="number" id="duration" name="duration" required>
+
+        <label for="price">Prijs (€)</label>
+        <input type="number" step="0.01" id="price" name="price" required>
+
+        <label for="startDate">Startdatum</label>
+        <input type="date" id="startDate" name="startDate" required>
+
+        <label for="status">Status</label>
+        <input
+            type="text"
+            id="status"
+            name="status"
+            placeholder="planned / paid / not planned"
+            required
+        >
+
+        <label for="activities">
+            Activiteiten (gescheiden met komma's)
+        </label>
+        <input
+            type="text"
+            id="activities"
+            name="activities"
+            placeholder="wandelen, zwemmen, citytrip"
+            required
+        >
+
+        <label for="paid">Betaald</label>
+        <select id="paid" name="paid" required>
+            <option value="true">Ja</option>
+            <option value="false">Nee</option>
+        </select>
+
+        <h3>Accommodatie</h3>
+
+        <label for="accommodationImg">Foto accommodatie uploaden</label>
+        <input
+            type="file"
+            id="accommodationImg"
+            name="accommodationImg"
+            accept="image/*"
+            required
+        >
+
+        <label for="accommodationName">Naam accommodatie</label>
+        <input
+            type="text"
+            id="accommodationName"
+            name="accommodationName"
+            required
+        >
+
+        <label for="accommodationRank">Rank</label>
+        <input
+            type="number"
+            id="accommodationRank"
+            name="accommodationRank"
+            required
+        >
+
+        <label for="accommodationAdress">Adres</label>
+        <input
+            type="text"
+            id="accommodationAdress"
+            name="accommodationAdress"
+            required
+        >
+
+        <button type="submit">
+            Reis toevoegen
+        </button>
+
+    </form>
+
+</main>
+
+<%- include("partials/footer") %>

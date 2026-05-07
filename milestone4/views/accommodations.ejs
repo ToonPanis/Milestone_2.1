@@ -1,11 +1,14 @@
 <%- include("partials/header") %>
 
-<h1>Alle Accommodaties</h1>
+<section class="page-title-section">
+    <h2 class="page-title">Alle accommodaties</h2>
+    <p class="page-subtitle">Bekijk alle verblijven die je hebt gepland</p>
+</section>
 
 <div class="accommodations-container">
     <% journeys.forEach(journey => { %>
         <div class="accommodation-card">
-            <a href="/accommodation/<%= journey.accommodation.id %>">
+            <a href="/journey/<%= journey.id %>/accommodation">
                 <img src="<%= journey.img %>" alt="Image of <%= journey.accommodation.name %>" class="accommodation-img">
                 <h2><%= journey.accommodation.name %></h2>
                 <p><strong>Adres:</strong> <%= journey.accommodation.adress %></p>
